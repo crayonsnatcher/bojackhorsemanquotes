@@ -1,0 +1,221 @@
+<html>
+  <head>
+    <title>Bojack Horseman</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Neucha" rel="stylesheet">
+
+    <style type="text/css">
+      body {
+        background: url("img/bojack-bg.jpg") repeat #a87354;
+        height: 100%;
+        font-family: "Neucha", cursive;
+        padding: 0;
+        margin: 0;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      ul, ol {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .wrapper {
+        /*height: 100vh;*/
+        padding: 80px 0 0 0;
+        width: 100%;
+      }
+
+      .bojack {
+        margin: 0 auto;
+        position: relative;
+        width: 100vw;
+        -webkit-transform: translate(0, 0);
+        transform: translate(0, 0);
+        -webkit-transition: all 300ms cubic-bezier(0.14, 0.62, 0.39, 1) 0s;
+        transition: all 300ms cubic-bezier(0.14, 0.62, 0.39, 1) 0s;
+      }
+      @media (min-width: 375px) {
+        .bojack {
+          width: 80vw;
+        }
+      }
+      @media (min-width: 800px) {
+        .bojack {
+          width: 60vw;
+        }
+      }
+      @media (min-width: 1200px) {
+        .bojack {
+          width: 40vw;
+        }
+      }
+      .bojack.bounce {
+        -webkit-transform: translate(0, -20px);
+        transform: translate(0, -20px);
+      }
+
+      .eyes {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-justify-content: space-around;
+            -ms-flex-pack: distribute;
+                justify-content: space-around;
+        position: absolute;
+        top: 100px;
+        width: 100%;
+      }
+
+      .eyes-left {
+        background-image: url("img/bojack-sprite.gif");
+        background-position: 0px 0px;
+        background-repeat: no-repeat;
+        height: 124px;
+        width: 72px;
+      }
+
+      .eyes-right {
+        background-image: url("img/bojack-sprite.gif");
+        background-position: -73px 0px;
+        background-repeat: no-repeat;
+        height: 124px;
+        width: 72px;
+      }
+
+      .nose {
+        background-image: url("img/bojack-sprite.gif");
+        background-position: -217px 0px;
+        background-repeat: no-repeat;
+        height: 303px;
+        width: 169px;
+      }
+
+      .diamond {
+        background-image: url("img/bojack-sprite.gif");
+        background-position: -149px 0;
+        height: 151px;
+        position: absolute;
+        width: 68px;
+        left: 50%;
+        position: absolute;
+        -webkit-transform: translate(-50%, 0);
+        transform: translate(-50%, 0);
+      }
+
+      .quotes {
+        position: absolute;
+        left: 50%;
+        position: absolute;
+        -webkit-transform: translate(-50%, 0);
+        transform: translate(-50%, 0);
+        text-align: center;
+        bottom: 160px;
+        vertical-align: middle;
+        display: inline-block;
+        font-size: 1.8em;
+        width: 70vw;
+      }
+      .quotes:before {
+        content: open-quote;
+      }
+      .quotes:after {
+        content: close-quote;
+      }
+
+      .social-media {
+        bottom: 40px;
+        position: absolute;
+        text-align: center;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+        left: 50%;
+        position: absolute;
+        -webkit-transform: translate(-50%, 0);
+        transform: translate(-50%, 0);
+      }
+      .social-media li {
+        padding: 0 20px;
+      }
+      .social-media a {
+        color: #F1CF14;
+        font-size: 1.4em;
+        text-decoration: none;
+      }
+      .social-media a:hover {
+        border-bottom: 2px solid #F1CF14;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <div class="bojack" id="bojack">
+        <div class="diamond"></div>
+        <div class="eyes">
+          <div class="eyes-left"></div>
+          <div class="eyes-right"></div>
+        </div>
+      </div>
+      <div class="quotes" id="quotes">
+        I’m responsible for my own happiness? I can’t even be responsible for my own breakfast!
+      </div>
+      <ul class="social-media">
+        <li>
+          <a href="#twitter">Twitter</a>
+        </li>
+        <li>
+          <a href="#facebook">Facebook</a>
+        </li>
+        <li>
+          <a href="#instagram">Instagram</a>
+        </li>
+      </ul>
+    </div>
+
+    <script>
+      // An array of possible quotes
+      var quotes = [
+          'I’m responsible for my own happiness? I can’t even be responsible for my own breakfast!', 
+          'I just spent 6 hours playing with fonts? Holy shit!',
+          'You didn’t know me. Then you fell in love with me. And now you know me.',
+          'I need to go take a shower so I can’t tell if I’m crying or not.',
+          'Man, I really regret buying those muffins and then eating them all on the drive home.',
+          'Closure is a made up thing.',
+          'I can’t say no to people because I want everyone to like me.',
+          'Not understanding that you’re a horrible person doesn’t make you less of a horrible person.',
+          'Somethings I feel like I was born with a leak, and any goodness Is tarted with just slowly spilled out of me, and now it’s all gone.'];
+
+
+      function rotatequote()
+      {
+          thequote = quotes.shift(); //Pull the top one
+          quotes.push(thequote); //And add it back to the end
+
+          document.getElementById('quotes').innerHTML = thequote;
+          var b = document.getElementById("bojack");
+          b.className += " bounce";
+          setTimeout(function(){ 
+            b.className = "bojack";
+          }, 300);
+          t=setTimeout("rotatequote()",5000);
+      }
+
+      // Start the first rotation.
+      rotatequote();
+    </script>
+  </body>
+</html>
